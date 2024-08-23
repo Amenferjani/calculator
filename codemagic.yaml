@@ -6,7 +6,7 @@ workflows:
     on:
       push:
         branches:
-          - main
+          - "main"
     jobs:
       - name: Build
         image: codemagic/react-native
