@@ -1,0 +1,25 @@
+version: 2.0
+
+workflows:
+  build:
+    name: Build and Test
+    on:
+      push:
+        branches:
+          - main
+    jobs:
+      - name: Build
+        image: codemagic/react-native
+        steps:
+          - checkout
+          - run:
+              name: Install dependencies
+              command: |
+                yarn install
+          - run:
+              name: Build APK
+              command: |
+                yarn android --variant=release
+          - store_artifacts:
+              path: android/app/build/outputs/apk/release/app-release.apk
+              destination: apk
